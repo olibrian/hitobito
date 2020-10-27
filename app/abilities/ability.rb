@@ -25,6 +25,7 @@ class Ability
                  OauthAbility,
                  PeopleFilterAbility,
                  PersonAbility,
+                 PersonDoubletAbility,
                  Person::AddRequestAbility,
                  QualificationAbility,
                  RoleAbility,

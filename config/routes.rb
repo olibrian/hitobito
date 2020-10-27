@@ -92,6 +92,8 @@ Hitobito::Application.routes.draw do
 
       end
 
+      resources :person_doublets, only: [:index]
+
       resource :tag_list, only: [:destroy, :create, :new] do
         get 'deletable' => 'tag_lists#deletable'
       end

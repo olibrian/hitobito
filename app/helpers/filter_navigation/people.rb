@@ -79,6 +79,9 @@ module FilterNavigation
         add_entire_subgroup_filter_link
       end
       add_people_filter_links
+      if group.layer?
+        add_doublet_list_link
+      end
       add_define_people_filter_link
     end
 
@@ -97,6 +100,10 @@ module FilterNavigation
     def add_people_filter_links
       filters = PeopleFilter.for_group(group).list
       filters.each { |filter| people_filter_link(filter) }
+    end
+
+    def add_doublet_list_link
+      dropdown.add_item(translate(:doublets), template.group_person_doublets_path(group.id))
     end
 
     def add_define_people_filter_link

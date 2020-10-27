@@ -515,6 +515,7 @@ de:
     entire_layer: 'Gesamte Ebene'
     entire_group: 'Gesamte Gruppe'
     new_filter: 'Neuer Filter...'
+    doublets: 'Dubletten'
 
   filter_navigation/events:
     all: 'Alle'

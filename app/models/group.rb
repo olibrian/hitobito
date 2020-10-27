@@ -196,7 +196,19 @@ class Group < ActiveRecord::Base
     GroupDecorator
   end
 
+  def person_doublets
+    if top?
+      PersonDoublet.all.includes(:person_1, :person_2)
+    else
+      PersonDoublet.none
+    end
+  end
+
   private
+
+  def top?
+    parent.nil?
+  end
 
   def destroy_orphaned_event(event)
     if event.group_ids.blank? || event.group_ids == [id]

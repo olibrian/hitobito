@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_124124) do
+ActiveRecord::Schema.define(version: 2020_10_12_121723) do
 
   create_table "additional_emails", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "contactable_type", null: false
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_124124) do
     t.string "short_name", limit: 31
     t.string "type", null: false
     t.string "email"
-    t.text "address", size: :medium
+    t.text "address"
     t.integer "zip_code"
     t.string "town"
     t.string "country"
@@ -488,7 +488,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_124124) do
     t.string "nickname"
     t.boolean "company", default: false, null: false
     t.string "email"
-    t.text "address", size: :medium
+    t.text "address"
     t.string "zip_code"
     t.string "town"
     t.string "country"
@@ -519,10 +519,6 @@ ActiveRecord::Schema.define(version: 2020_10_23_124124) do
     t.string "household_key"
     t.string "event_feed_token"
     t.string "unlock_token"
-    t.string "title"
-    t.string "website"
-    t.string "correspondance_language", default: "de", null: false
-    t.string "civil_status", default: "single", null: false
     t.index ["authentication_token"], name: "index_people_on_authentication_token"
     t.index ["email"], name: "index_people_on_email", unique: true
     t.index ["event_feed_token"], name: "index_people_on_event_feed_token", unique: true
@@ -567,13 +563,6 @@ ActiveRecord::Schema.define(version: 2020_10_23_124124) do
     t.index ["type", "body_id"], name: "index_person_add_requests_on_type_and_body_id"
   end
 
-  create_table "person_doublets", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.integer "person1_id", null: false
-    t.integer "person2_id", null: false
-    t.boolean "ignore", default: false, null: false
-    t.index ["person1_id", "person2_id"], name: "index_person_doublets_on_person1_id_and_person2_id", unique: true
-  end
-
   create_table "phone_numbers", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "contactable_type", null: false
     t.integer "contactable_id", null: false
@@ -589,7 +578,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_124124) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "label", null: false
-    t.text "description", size: :medium
+    t.text "description"
     t.index ["locale"], name: "index_qualification_kind_translations_on_locale"
     t.index ["qualification_kind_id"], name: "index_qualification_kind_translations_on_qualification_kind_id"
   end
