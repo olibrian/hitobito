@@ -1,14 +1,16 @@
-![hitobito logo](app/assets/images/logo.png)
+![hitobito logo](https://hitobito.com/images/logo.svg)
 
 
-# Welcome to hitobito
+# Welcome to hitobito 人人
 
 hitobito is an open source web application to manage complex group hierarchies with members, events and a lot more.
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-[![Build Status](https://travis-ci.org/hitobito/hitobito.svg?branch=master)](https://travis-ci.org/hitobito/hitobito)
-[![Open Source Helpers](https://www.codetriage.com/hitobito/hitobito/badges/users.svg)](https://www.codetriage.com/hitobito/hitobito)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) 
+[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://hitobito.readthedocs.io/?badge=latest)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/hitobito/hitobito/blob/master/LICENSE)
 
+[![Open Source Helpers](https://www.codetriage.com/hitobito/hitobito/badges/users.svg)](https://www.codetriage.com/hitobito/hitobito)
+[![Build Status](https://travis-ci.org/hitobito/hitobito.svg?branch=master)](https://travis-ci.org/hitobito/hitobito)
 
 ## Development
 
@@ -43,6 +45,7 @@ An example group type definition might look like this:
       class Role < Leader
         self.permissions = [:layer_full, :contact_data]
       end
+
 
       class Member < Role
         self.permissions = [:group_read]
