@@ -1,3 +1,6 @@
+![hitobito logo](app/assets/images/logo.png)
+
+
 # Welcome to hitobito
 
 hitobito is an open source web application to manage complex group hierarchies with members, events and a lot more.
