@@ -41,7 +41,7 @@ An example group type definition might look like this:
 
       children Group::Layer, Group::Board, Group::Basic
 
-      class Role < Leade
+      class Role < Leader
         self.permissions = [:layer_full, :contact_data]
       end
 
