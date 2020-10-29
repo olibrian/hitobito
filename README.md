@@ -6,8 +6,8 @@
 hitobito is an open source web application to manage organisation and communities with complex group hierarchies with members, events, courses, mailings, communication and a lot more.
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/hitobito/hitobito/graphs/commit-activity) 
-[![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://hitobito.readthedocs.io/?badge=latest)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://img.shields.io/github/license/hitobito/hitobito)
+[![Documentation Status](https://readthedocs.org/projects/hitobito/badge/?version=latest)](https://hitobito.readthedocs.io/?badge=latest)
+[![GitHub](https://img.shields.io/github/license/hitobito/hitobito)](https://github.com/olibrian/hitobito/blob/master/LICENSE)
 [![Open Source Helpers](https://www.codetriage.com/hitobito/hitobito/badges/users.svg)](https://www.codetriage.com/hitobito/hitobito)
 [![Build Status](https://travis-ci.org/hitobito/hitobito.svg?branch=master)](https://travis-ci.org/hitobito/hitobito)
 
@@ -41,7 +41,7 @@ An example group type definition might look like this:
 
       children Group::Layer, Group::Board, Group::Basic
 
-      class Role < Leader
+      class Role < Leade
         self.permissions = [:layer_full, :contact_data]
       end
 
