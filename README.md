@@ -1,14 +1,13 @@
 ![hitobito logo](https://hitobito.com/images/logo.svg)
 
-
+#
 # Welcome to hitobito 人人
 
-hitobito is an open source web application to manage complex group hierarchies with members, events and a lot more.
+hitobito is an open source web application to manage organisation and communities with complex group hierarchies with members, events, courses, mailings, communication and a lot more.
 
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity) 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/hitobito/hitobito/graphs/commit-activity) 
 [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](https://hitobito.readthedocs.io/?badge=latest)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/hitobito/hitobito/blob/master/LICENSE)
-
 [![Open Source Helpers](https://www.codetriage.com/hitobito/hitobito/badges/users.svg)](https://www.codetriage.com/hitobito/hitobito)
 [![Build Status](https://travis-ci.org/hitobito/hitobito.svg?branch=master)](https://travis-ci.org/hitobito/hitobito)
 
@@ -86,8 +85,8 @@ for more information on wagons and its available rake tasks.
 ## License
 
 hitobito is released under the GNU Affero General Public License.
-Copyright 2012-2015 by Jungwacht Blauring Schweiz, Puzzle ITC GmbH, Pfadibewegung Schweiz,
-CEVI Regionalverband ZH-SH-GL, Insieme Schweiz.
+Copyright 2012-2020 by Jungwacht Blauring Schweiz, Puzzle ITC GmbH, Pfadibewegung Schweiz,
+CEVI Regionalverband ZH-SH-GL, CEVI Schweiz, Insieme Schweiz, CVP Schweiz.
 See COPYING for more details.
 
 hitobito was developed by [Puzzle ITC GmbH](http://puzzle.ch).
