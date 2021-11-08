@@ -95,3 +95,8 @@ jobs:
       - name: 'Run Lint and Tests'
         run: |
           bundle exec rake db:create ci --trace
+
+  rebuild_wagons:
+    needs: build
+    uses: hitobito/hitobito/.github/workflows/rebuild-wagons.yml
+    if: github.ref == 'refs/heads/master'

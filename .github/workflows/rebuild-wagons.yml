@@ -1,0 +1,22 @@
+name: 'Rebuild wagons'
+
+on:
+  push:
+
+# TODO change
+#on: workflow_call
+
+jobs:
+  rebuild:
+    strategy:
+      matrix:
+        wagon: ['generic']
+    runs-on: ubuntu-latest
+    steps:
+      - run: |-
+          wagon=hitobito_${{ matrix.wagon }}
+          curl -X POST \
+            -H "Authorization: Bearer ${{secrets.GITHUB_TOKEN}}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/hitobito/$wagon/actions/workflows/tests.yml/dispatches \
+            -d '{"ref": "master"}'
