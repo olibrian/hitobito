@@ -7,7 +7,11 @@
 
 class MailingLists::BulkMail::Retriever
 
+  LOG_PREFIX = 'BulkMail Retriever: '
+
   def perform
+    return abort_imap_unavailable unless imap_server_available?
+
     mail_uids.each do |mail_uid|
       process_mail(mail_uid)
     end
@@ -29,7 +33,7 @@ class MailingLists::BulkMail::Retriever
     if validator.valid_mail?
       process_valid_mail(mail, validator)
     else
-      # TODO: maybe log entry?
+      log_info("Ignored invalid email from #{mail.sender_email}")
     end
 
     delete_mail(mail_uid)
@@ -41,29 +45,36 @@ class MailingLists::BulkMail::Retriever
       process_mailing_list_mail(mail, validator, mailing_list)
     else
       mail.mail_log.update!(status: :unknown_recipient)
-      # TODO maybe log entry?
+      log_info("Ignored email from #{mail.sender_email} for unknown list #{mail.original_to}")
     end
   end
 
   def process_mailing_list_mail(mail, validator, mailing_list)
     bulk_mail = mail.mail_log.message
-    bulk_mail.update!(raw_source: mail.raw_source, mailing_list: mailing_list)
+    bulk_mail.update!(mailing_list: mailing_list)
 
     if validator.sender_allowed?(mailing_list)
+      bulk_mail.update!(raw_source: mail.raw_source)
       Messages::DispatchJob.new(bulk_mail).enqueue!
     else
       mail.mail_log.update!(status: :sender_rejected)
-      sender_rejected(bulk_mail)
+      sender_rejected(mail, bulk_mail)
     end
+  end
+
+  def abort_imap_unavailable
+    imap_address = imap.config(:address)
+    log_info("cannot connect to IMAP server #{imap_address}, terminating.")
   end
 
   def validator(mail)
     MailingLists::BulkMail::ImapMailValidator.new(mail)
   end
 
-  def sender_rejected(message)
-    # TODO: log that sender has been rejected
-    MailingLists::BulkMail::SenderRejectedMessageJob.new(message).enqueue!
+  def sender_rejected(mail, bulk_mail)
+    list_email = bulk_mail.mailing_list.mail_address
+    log_info("Rejecting email from #{mail.sender_email} for list #{list_email}")
+    MailingLists::BulkMail::SenderRejectedMessageJob.new(bulk_mail).enqueue!
   end
 
   def assign_mailing_list(mail)
@@ -93,14 +104,32 @@ class MailingLists::BulkMail::Retriever
     raise MailingLists::BulkMail::MailProcessedBeforeError, mail_log
   end
 
+  def log_info(text)
+    logger.info LOG_PREFIX + text
+  end
+
+  def logger
+    Delayed::Worker.logger || Rails.logger
+  end
+
   # IMAP CONNECTOR
 
   def imap
     @imap ||= Imap::Connector.new
   end
 
+  def imap_server_available?
+    mail_uids != :connection_error
+  end
+
   def mail_uids
-    @mail_uids ||= imap.fetch_mail_uids(:inbox)
+    @mail_uids ||= fetch_mail_uids
+  end
+
+  def fetch_mail_uids
+    imap.fetch_mail_uids(:inbox)
+  rescue Errno::EADDRNOTAVAIL
+    :connection_error
   end
 
   def delete_mail(uid)
