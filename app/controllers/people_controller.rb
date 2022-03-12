@@ -276,4 +276,12 @@ class PeopleController < CrudController
     flash[:notice] = I18n.t("#{controller_name}.#{action_name}_email_must_be_confirmed")
   end
 
+  def json_serializer
+    if params[:api_version] == 'v2'
+      V2::PersonSerializer 
+    else
+      action_name == 'index' ? ListSerializer : PersonSerializer
+    end
+  end
+
 end

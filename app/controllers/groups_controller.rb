@@ -31,7 +31,7 @@ class GroupsController < CrudController
   def show
     super do |format|
       format.json do
-        render json: GroupSerializer.new(entry.decorate, controller: self)
+        render json: json_serializer.new(entry.decorate, controller: self, include: [:children, :parent, :layer_group, :hierarchy], params: { only_public: !can?(:show_details, entry) })
       end
     end
   end
@@ -107,6 +107,10 @@ class GroupsController < CrudController
 
   def sub_groups_label
     @sub_groups_label ||= translate(:subgroups)
+  end
+
+  def json_serializer
+    params[:api_version] == 'v2' ? V2::GroupSerializer : GroupSerializer
   end
 
 end

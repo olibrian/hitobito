@@ -7,7 +7,7 @@
 
 class V2::GroupSerializer
   include JSONAPI::Serializer
-  include ContactableSerializer
+  include V2::ContactableSerializer
 
   attributes :layer, :name, :short_name, :email
 
@@ -19,6 +19,7 @@ class V2::GroupSerializer
       }
     end   
   end
+
 
   belongs_to :parent, serializer: V2::GroupSerializer
   belongs_to :layer_group, serializer: V2::GroupSerializer

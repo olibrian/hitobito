@@ -76,6 +76,14 @@ describe GroupsController do
           group = json['groups'].first
           expect(group['links']['children'].size).to eq(4)
         end
+
+        context 'v2' do
+          it 'is valid' do
+            get :show, params: { id: group.id, api_version: 'v2' }, format: :json
+            json = JSON.parse(response.body)
+            expect(json['data']['relationships']['children']['data'].size).to eq(4)
+          end
+        end
       end
 
     end
