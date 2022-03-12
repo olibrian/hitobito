@@ -177,15 +177,16 @@ class EventsController < CrudController
 
   def render_entries_json(paged_entries)
     render json: [paging_properties(paged_entries),
-                  ListSerializer.new(paged_entries.decorate,
+                  json_serializer.new(paged_entries.decorate,
                                      group: group,
                                      page: params[:page],
                                      serializer: EventSerializer,
+                                     include: [:dates, :groups, :kind],
                                      controller: self)].inject(&:merge)
   end
 
   def render_entry_json
-    render json: EventSerializer.new(entry.decorate, group: @group, controller: self)
+    render json: json_serializer.new(entry.decorate, group: @group, controller: self, include: [:dates, :groups, :kind])
   end
 
   def typed_group_events_path(group, event_type, options = {})
@@ -275,6 +276,14 @@ class EventsController < CrudController
       visible_entry_ids = entries.select { |entry| can?(:show, entry) }.map(&:id)
 
       entries.where(id: visible_entry_ids)
+    end
+  end
+
+  def json_serializer
+    if params[:api_version] == 'v2'
+      V2::EventSerializer 
+    else
+      action_name == 'index' ? ListSerializer : EventSerializer
     end
   end
 end
