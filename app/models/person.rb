@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-#  Copyright (c) 2012-2021, Pfadibewegung Schweiz. This file is part of
+#  Copyright (c) 2012-2022, Pfadibewegung Schweiz. This file is part of
 #  hitobito and licensed under the Affero General Public License version 3
 #  or later. See the COPYING file at the top-level directory or at
 #  https://github.com/hitobito/hitobito.
@@ -113,7 +113,18 @@ class Person < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   i18n_setter :gender, (GENDERS + [nil])
   i18n_boolean_setter :company
 
-  mount_uploader :picture, Person::PictureUploader
+  mount_uploader :carrierwave_picture, Person::PictureUploader, mount_on: 'picture'
+  has_one_attached :picture do |attachable|
+    attachable.variant :thumb, resize_to_fill: [32, 32]
+  end
+
+  def remove_picture
+    false
+  end
+
+  def remove_picture=(delete_it)
+    picture.purge_later if delete_it
+  end
 
   model_stamper
   stampable stamper_class_name: :person,
@@ -205,6 +216,11 @@ class Person < ActiveRecord::Base # rubocop:disable Metrics/ClassLength
   validates :additional_information, length: { allow_nil: true, maximum: 2**16 - 1 }
   validate :assert_has_any_name
   validates :address, length: { allow_nil: true, maximum: 1024 }
+
+  if ENV['NOCHMAL_MIGRATION'].blank? # if not migrating RIGHT NOW, i.e. normal case
+    validates :picture, dimension: { width: { max: 8_000 }, height: { max: 8_000 } },
+                        content_type: ['image/jpeg', 'image/gif', 'image/png']
+  end
   # more validations defined by devise
 
 
