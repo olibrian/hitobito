@@ -3,7 +3,7 @@ require 'selenium-webdriver'
 
 Capybara.default_driver = :selenium_chrome
 
-url = 'http://localhost:3000'
+url = 'https://pbs.puzzle.ch/de/users/sign_in'
 
 Capybara.app_host = url
 
