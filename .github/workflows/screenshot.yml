@@ -1,4 +1,4 @@
-name: 'Rails Lint and Test'
+name: 'Capi Screenshots'
 
 on:
   push:
