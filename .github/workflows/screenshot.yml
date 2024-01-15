@@ -99,6 +99,6 @@ jobs:
         run: |
           yarn install --frozen-lockfile
 
-      - name: ''
+      - name: 'made screenshots'
         run: |
           bundle exec ruby capture-screenshots.rb
