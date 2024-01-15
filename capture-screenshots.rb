@@ -1,3 +1,7 @@
+require 'capybara/dsl'
+require 'selenium-webdriver'
+
+Capybara.default_driver = :selenium_chrome
 
 url = ARGV[0] # URL passed as a command-line argument
 
