@@ -11,7 +11,7 @@ class ScreenshotCapture
   include Capybara::DSL
 
   def capture_screenshot
-    visit('/')
+    visit(url)
     save_screenshot('screenshots/screenshot.png', full: true)
   end
 end
