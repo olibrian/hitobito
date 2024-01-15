@@ -3,7 +3,7 @@ require 'selenium-webdriver'
 
 Capybara.default_driver = :selenium_chrome
 
-url = ARGV[0] # URL passed as a command-line argument
+url = localhost:3000
 
 Capybara.app_host = url
 
