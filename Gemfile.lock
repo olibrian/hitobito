@@ -371,11 +371,10 @@ GEM
     http_accept_language (2.1.1)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    icalendar (2.12.0)
+    icalendar (2.13.0)
       base64
       ice_cube (~> 0.16)
       logger
-      ostruct
     ice_cube (0.17.0)
     ice_nine (0.11.2)
     image_processing (1.14.0)
