@@ -556,7 +556,7 @@ GEM
     puma (7.2.1)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.2.6)
+    rack (3.2.8)
     rack-cors (3.0.0)
       logger
       rack (>= 3.0.14)
@@ -764,7 +764,6 @@ GEM
     simplecov_json_formatter (0.1.4)
     simpleidn (0.2.3)
     slop (3.6.0)
-    social_security_number (0.1.12)
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
